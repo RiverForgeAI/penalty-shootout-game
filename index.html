@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Penalty Shootout - Game v1.1</title>
+  <title>Penalty Shootout - Game v1.2</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -63,9 +63,12 @@
       <section class="controls">
         <div class="instructions">Choose where to shoot:</div>
         <div class="buttons">
-          <button class="shoot-btn" data-dir="left">Left</button>
-          <button class="shoot-btn" data-dir="center">Center</button>
-          <button class="shoot-btn" data-dir="right">Right</button>
+          <button class="shoot-btn" data-zone="tl">Top Left</button>
+          <button class="shoot-btn" data-zone="tc">Top Centre</button>
+          <button class="shoot-btn" data-zone="tr">Top Right</button>
+          <button class="shoot-btn" data-zone="bl">Bottom Left</button>
+          <button class="shoot-btn" data-zone="bc">Bottom Centre</button>
+          <button class="shoot-btn" data-zone="br">Bottom Right</button>
         </div>
 
         <div id="result" class="result">Good luck!</div>
