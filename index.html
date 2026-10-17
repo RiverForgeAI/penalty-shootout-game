@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Penalty Shootout - Game v1</title>
+  <title>Penalty Shootout - Game v1.1</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,7 +22,16 @@
       <section class="arena">
         <!-- stadium background + field -->
         <div class="stadium">
-          <div class="stands"></div>
+          <div class="stands">
+            <div class="crowd" aria-hidden="true"></div>
+          </div>
+
+          <!-- floodlights at top corners -->
+          <div class="floodlights">
+            <div class="light left"></div>
+            <div class="light right"></div>
+          </div>
+
           <div class="field">
             <div class="goal">
               <div class="goal-post left"></div>
@@ -30,10 +39,18 @@
               <div class="goal-post right"></div>
             </div>
 
-            <!-- goalkeeper is positioned near the goal and will 'dive' -->
-            <div id="goalkeeper" class="goalkeeper">
-              <div class="head"></div>
-              <div class="body"></div>
+            <!-- goalkeeper with more body parts: head, arms, legs, gloves -->
+            <div id="goalkeeper" class="goalkeeper" aria-hidden="true">
+              <div class="g-head"></div>
+              <div class="g-body">
+                <div class="g-arm left-arm"><div class="glove"></div></div>
+                <div class="g-torso"></div>
+                <div class="g-arm right-arm"><div class="glove"></div></div>
+              </div>
+              <div class="g-legs">
+                <div class="leg left-leg"></div>
+                <div class="leg right-leg"></div>
+              </div>
             </div>
 
             <!-- ball starts near bottom center -->
