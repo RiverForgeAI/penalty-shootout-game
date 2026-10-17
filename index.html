@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Penalty Shootout - Game v1.1</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-wrap">
+    <header>
+      <h1>Penalty Shootout</h1>
+    </header>
+
+    <main>
+      <section class="scoreboard">
+        <div>Goals: <span id="goals">0</span></div>
+        <div>Shots: <span id="shots-taken">0</span></div>
+        <div>Remaining: <span id="shots-remaining">5</span></div>
+      </section>
+
+      <section class="arena">
+        <!-- stadium background + field -->
+        <div class="stadium">
+          <div class="stands">
+            <div class="crowd" aria-hidden="true"></div>
+          </div>
+
+          <!-- floodlights at top corners -->
+          <div class="floodlights">
+            <div class="light left"></div>
+            <div class="light right"></div>
+          </div>
+
+          <div class="field">
+            <div class="goal">
+              <div class="goal-post left"></div>
+              <div class="goal-net"></div>
+              <div class="goal-post right"></div>
+            </div>
+
+            <!-- goalkeeper with more body parts: head, arms, legs, gloves -->
+            <div id="goalkeeper" class="goalkeeper" aria-hidden="true">
+              <div class="g-head"></div>
+              <div class="g-body">
+                <div class="g-arm left-arm"><div class="glove"></div></div>
+                <div class="g-torso"></div>
+                <div class="g-arm right-arm"><div class="glove"></div></div>
+              </div>
+              <div class="g-legs">
+                <div class="leg left-leg"></div>
+                <div class="leg right-leg"></div>
+              </div>
+            </div>
+
+            <!-- ball starts near bottom center -->
+            <div id="ball" class="ball" aria-hidden="true"></div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="controls">
+        <div class="instructions">Choose where to shoot:</div>
+        <div class="buttons">
+          <button class="shoot-btn" data-dir="left">Left</button>
+          <button class="shoot-btn" data-dir="center">Center</button>
+          <button class="shoot-btn" data-dir="right">Right</button>
+        </div>
+
+        <div id="result" class="result">Good luck!</div>
+
+        <button id="restart" class="restart">Restart</button>
+      </section>
+    </main>
+
+    <footer>
+      <small>Playable on desktop and mobile — built with vanilla HTML, CSS & JavaScript</small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+/* style.css - v1.1 improvements: stadium, floodlights, improved goalkeeper, ball and celebration */
+
+:root{
+  --green-1:#0b6b2b;
+  --green-2:#2fa44f;
+  --sky:#7ec0ff;
+  --accent:#ffd95a;
+  --stadium-dark:#0b3c1a;
+  --net:#e6f3ff22;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial}
+body{background:linear-gradient(180deg,#04121a 0%, #07222a 40%);display:flex;align-items:center;justify-content:center;padding:18px}
+
+.game-wrap{width:100%;max-width:980px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.06));border-radius:12px;padding:14px;box-shadow:0 10px 30px rgba(0,0,0,0.6);color:#fff}
+header{display:flex;justify-content:center;margin-bottom:8px}
+header h1{margin:0;font-size:1.6rem;letter-spacing:1px}
+
+main{display:grid;grid-template-columns:1fr;gap:12px}
+.scoreboard{display:flex;justify-content:space-around;padding:8px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.08));border-radius:8px}
+.scoreboard div{font-weight:700}
+
+.arena{display:flex;justify-content:center}
+.stadium{width:100%;max-width:820px;border-radius:10px;overflow:hidden;position:relative;background:radial-gradient(ellipse at 50% 10%, rgba(255,255,255,0.03), transparent 20%)}
+
+/* stands and crowd */
+.stands{height:110px;background:linear-gradient(180deg,#0a2b2a 0%, #062922 100%);position:relative}
+.crowd{position:absolute;inset:12px 8px;border-radius:6px;background-image:
+  radial-gradient(circle at 10% 30%, #ffd5a6 2px, transparent 3px),
+  radial-gradient(circle at 20% 50%, #ffb3b3 2px, transparent 3px),
+  radial-gradient(circle at 30% 20%, #ffd95a 2px, transparent 3px),
+  radial-gradient(circle at 40% 60%, #fff 2px, transparent 3px),
+  radial-gradient(circle at 50% 30%, #c3ffb3 2px, transparent 3px),
+  radial-gradient(circle at 60% 50%, #b3d1ff 2px, transparent 3px),
+  radial-gradient(circle at 70% 20%, #ffd95a 2px, transparent 3px),
+  radial-gradient(circle at 80% 55%, #ffb3b3 2px, transparent 3px);
+  background-size:80px 40px;opacity:0.95}
+
+/* floodlights */
+.floodlights{position:absolute;top:0;left:0;right:0;height:1px;pointer-events:none}
+.floodlights .light{position:absolute;top:-40px;width:80px;height:80px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #fff5, #fff0 40%);filter:blur(12px)}
+.floodlights .left{left:10px;transform:translateY(0)}
+.floodlights .right{right:10px}
+.floodlights::after{content:'';position:absolute;left:50%;top:-6px;transform:translateX(-50%);width:70%;height:200px;background:radial-gradient(ellipse at center, rgba(255,255,255,0.06), rgba(255,255,255,0.01) 40%);pointer-events:none}
+
+.field{position:relative;padding:32px 16px 56px 16px;background:linear-gradient(180deg,var(--green-2) 0%, var(--green-1) 100%);min-height:460px;overflow:hidden;border-top:4px solid rgba(255,255,255,0.02)}
+.field::before{content:'';position:absolute;left:50%;top:24px;transform:translateX(-50%);width:88%;height:2px;background:rgba(255,255,255,0.06)}
+
+/* Goal */
+.goal{position:absolute;left:50%;transform:translateX(-50%);top:48px;width:360px;height:140px;display:flex;align-items:center;justify-content:center}
+.goal-post{width:12px;height:140px;background:linear-gradient(180deg,#fff,#e9e9e9);box-shadow:inset 0 2px 0 rgba(0,0,0,0.2)}
+.goal-net{flex:1;height:120px;margin:0 6px;border:2px solid var(--net);background:repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0 6px, transparent 6px 12px)}
+
+/* Goalkeeper improvements */
+.goalkeeper{position:absolute;top:110px;left:50%;transform:translateX(-50%);width:80px;height:110px;display:flex;flex-direction:column;align-items:center;transition:transform 420ms ease-out}
+.g-head{width:30px;height:30px;background:linear-gradient(#ffd9b3,#f0caa0);border-radius:50%;border:2px solid rgba(0,0,0,0.25);box-shadow:0 4px 10px rgba(0,0,0,0.35)}
+.g-body{width:80px;height:56px;display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+.g-torso{width:36px;height:46px;background:linear-gradient(180deg,#0056a6,#003f7a);border-radius:6px}
+.g-arm{width:16px;height:46px;background:linear-gradient(180deg,#004f90,#0a6fb4);border-radius:8px;display:flex;align-items:flex-end;justify-content:center;position:relative}
+.g-arm .glove{width:14px;height:14px;background:#ffd9b3;border-radius:3px;margin-bottom:4px;border:2px solid #d39c6f}
+.g-legs{display:flex;gap:10px;margin-top:6px}
+.leg{width:16px;height:34px;background:linear-gradient(180deg,#003b5a,#00283a);border-radius:6px}
+
+/* Dive animation states: larger translations + arm rotation */
+.goalkeeper.dive-left{transform:translate(calc(-50% - 140px), 36px) rotate(-23deg)}
+.goalkeeper.dive-right{transform:translate(calc(-50% + 140px), 36px) rotate(23deg)}
+.goalkeeper.dive-center{transform:translateX(-50%) translateY(12px) scale(0.98)}
+
+/* Add arm/leg movement when diving */
+.goalkeeper.dive-left .left-arm{transform:translateY(6px) rotate(-28deg)}
+.goalkeeper.dive-left .right-arm{transform:translateY(2px) rotate(-6deg)}
+.goalkeeper.dive-right .right-arm{transform:translateY(6px) rotate(28deg)}
+.goalkeeper.dive-right .left-arm{transform:translateY(2px) rotate(6deg)}
+.goalkeeper .g-arm{transition:transform 420ms ease-out}
+.goalkeeper .g-legs .leg{transition:transform 420ms ease-out}
+
+/* Ball: better look + shadow + spin */
+.ball{position:absolute;left:50%;bottom:26px;width:42px;height:42px;border-radius:50%;background:
+  radial-gradient(circle at 30% 30%, #fff 0 20%, #ddd 21% 45%, #000 46% 57%),
+  linear-gradient(180deg,#ffffff,#e8e8e8);transform:translateX(-50%) translateY(0);box-shadow:0 10px 22px rgba(0,0,0,0.45);transition:transform 240ms ease-out}
+.ball.spin{animation:spin 700ms linear}
+@keyframes spin{from{transform:translateX(var(--tx,0)) translateY(var(--ty,0)) rotate(0deg)}to{transform:translateX(var(--tx,0)) translateY(var(--ty,0)) rotate(720deg)}}
+
+/* Result and celebration */
+.result{margin-top:6px;font-weight:800;font-size:1.1rem;min-height:28px;text-align:center}
+.result.flash{animation:pop 600ms ease}
+@keyframes pop{0%{transform:scale(0.96);opacity:0.6}50%{transform:scale(1.06);opacity:1}100%{transform:scale(1)}}
+
+.field.celebrate{box-shadow:0 0 40px rgba(255,215,90,0.14) inset}
+
+/* simple confetti pieces */
+.confetti{position:absolute;width:8px;height:12px;opacity:0;transform-origin:center;pointer-events:none;border-radius:2px}
+.confetti.animate{animation:confetti-fall 1200ms ease-out forwards}
+@keyframes confetti-fall{0%{opacity:1;transform:translateY(0) rotate(0) scale(1)}100%{opacity:0;transform:translateY(280px) rotate(480deg) scale(0.8)}}
+
+/* Controls */
+.controls{display:flex;flex-direction:column;align-items:center;gap:10px;padding:12px}
+.instructions{font-size:0.95rem}
+.buttons{display:flex;gap:10px}
+.shoot-btn{padding:10px 18px;border-radius:8px;border:none;background:var(--accent);color:#222;font-weight:700;font-size:1rem;cursor:pointer}
+.shoot-btn:active{transform:translateY(1px)}
+.shoot-btn:disabled{opacity:0.5;cursor:not-allowed}
+.restart{margin-top:6px;padding:8px 12px;border-radius:8px;border:2px solid rgba(255,255,255,0.12);background:transparent;color:#fff;cursor:pointer}
+.restart:active{transform:translateY(1px)}
+
+footer{margin-top:8px;text-align:center;opacity:0.9}
+
+/* Mobile adjustments */
+@media (max-width:520px){
+  .goal{width:260px}
+  .goalkeeper{width:64px;height:88px}
+  .ball{width:32px;height:32px}
+  .field{min-height:380px}
+  .stands{height:86px}
+}
